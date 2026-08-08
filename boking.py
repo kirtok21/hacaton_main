@@ -20,8 +20,7 @@ async def handle_time(
         time_start: int = Form(...),
         time_end: int = Form(...),
         size: str = Form(...),
-        week_day: str = Form(...)
-):
+        week_day: str = Form(...)):
     if time_start > time_end or time_start == time_end:
         return "время начала не может быть больше или быть равным времени конца"
     time_list = []

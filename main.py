@@ -152,3 +152,43 @@ async def all_bookings(request: Request):
     for i in values.items():
         a=a+str(i)+'\n'
     return a
+
+@app.get("/booking", response_class=HTMLResponse)
+async def booking(request: Request):
+    return templates.TemplateResponse(request, "create_booking.html")
+
+@app.post("/booking", response_class=HTMLResponse)
+async def booking1(request: Request,
+        time_start: int = Form(...),
+        time_end: int = Form(...),
+        number: int = Form(...),
+        week_day: str = Form(...)):
+    if time_start > time_end :
+        values={
+            "response":"Err_Time"
+        }
+        return templates.TemplateResponse(request, "hub.html",values)
+    global room_list
+    global week_days
+    global user
+    free=True
+    room_id=room_list[number-1]
+    with open(f"bookings\\{week_day}\\{room_id}.txt",'r') as f:
+        books=f.read().strip().split()
+        for i in range(time_start-8,time_end-7):
+            if books[i]!="empty":
+                free=False
+            else:
+                books[i]=user[3]+"_"+user[4]
+    with open(f"bookings\\{week_day}\\{room_id}.txt", 'w') as f:
+        print(*books,file=f,end='')
+        if free:
+            values={
+                "response":"OK"
+            }
+            return templates.TemplateResponse(request, "hub.html",values)
+        else:
+            values = {
+                "response": "Err_Not_Free"
+            }
+            return templates.TemplateResponse(request, "hub.html",values)
