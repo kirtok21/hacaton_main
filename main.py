@@ -14,7 +14,8 @@ with open("rooms.txt",'r') as f:
     splt=f.read().split('\n')
     for i in splt:
         room_list.append(i.split()[1])
-
+values={}
+success=False
 week_days=["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 @app.get("/", response_class=HTMLResponse)
 async def main(request: Request):
@@ -25,50 +26,52 @@ async def reg(request: Request):
     return templates.TemplateResponse(request, "reg.html")
 
 @app.post("/reg", response_class=HTMLResponse)
-async def reg1(request: Request,
+async def reg(request: Request,
                login: str=Form(...),
                password: str=Form(...),
                email: str=Form(...),
                name: str=Form(...),
                surname: str=Form(...)):
     global user
+    global success
+    success=False
     data = await request.form()
     # login = data['login']
     # password = data['password']
     # email = data['email']
     # name = data['name']
     # surname = data['surname']
-    f=open("profiles.txt",'a+')
+    f=open("profiles.txt",'r+')
     a=f.read()
     if login not in a:
         user=[login,password,email,name,surname]
-        a=login+" "+password+" "+email+" "+name+" "+surname
+        #print(a.split()[0])
+        print(login)
         f.write(login+" "+password+" "+email+" "+name+" "+surname+" "+'\n')
         f.close()
         values = {
             "reply": None,
-            "result": "hub"
+            "result": "hub.html"
         }
+        success=True
         return templates.TemplateResponse(request, "hub.html",values)
     else:
+        success=False
         values={
             "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию",
-            "result": "reg"
+            "result": "reg.html"
         }
-        return templates.TemplateResponse(request, "auth.html",values)
+        return templates.TemplateResponse(request, "main.html",values)
 
-@app.get("/auth", response_class=HTMLResponse)
-async def auth(request: Request):
-    return templates.TemplateResponse(request, "auth.html")
 
 @app.post("/auth", response_class=HTMLResponse)
 async def auth1(request: Request,
-                username: str=Form(...),
+                login: str=Form(...),
                 password: str=Form(...)):
     global user
     authorisation = False
     data = await request.form()
-    # username=data['name']
+    # login=data['login']
     # password=data['password']
     with open("profiles.txt", "r", encoding="utf-8") as file:
         for line in file:
@@ -76,11 +79,12 @@ async def auth1(request: Request,
             parts = cleaned_line.split()
             file_login = parts[0]
             file_password = parts[1]
-            print(username,password)
+            file_email = parts[2]
+            print(login,password)
             print(parts)
-            print(file_login == username)
+            print(file_login == login)
             print(file_password == password)
-            if file_login == username and file_password == password:
+            if (file_login == login or file_email==login) and file_password == password:
                 user = list(parts)
                 print(parts)
                 authorisation = True
@@ -91,7 +95,7 @@ async def auth1(request: Request,
                     "login": user[0]
                 }
                 break
-
+    print(user)
     if not(authorisation):
         values = {
             "reply": "Неправильный пароль / Пользователя с таким логином не сущевствует"
@@ -100,7 +104,11 @@ async def auth1(request: Request,
     else:
         return templates.TemplateResponse(request, "hub.html", values)
 
-@app.get("/hub", response_class=HTMLResponse)
+@app.get("/auth", response_class=HTMLResponse)
+async def auth(request: Request):
+    return templates.TemplateResponse(request, "auth.html",values)
+
+@app.post("/hub", response_class=HTMLResponse)
 async def hub(request: Request):
     return templates.TemplateResponse(request, "hub.html")
 
@@ -113,8 +121,21 @@ async def profile(request: Request):
         "email": user[2],
         "login": user[0],
     }
+    print(values)
     return templates.TemplateResponse(request, "profile.html",values)
 
+@app.post("/profile", response_class=HTMLResponse)
+async def profile1(request: Request):
+    global user
+    values = {
+        "name":user[3],
+        "surname": user[4],
+        "email": user[2],
+        "login": user[0],
+    }
+    print(values)
+    print(user)
+    return templates.TemplateResponse(request, "profile.html",values)
 @app.get("/clear_bookings", response_class=HTMLResponse)
 async def clear_bookings(request: Request):
     return templates.TemplateResponse(request, "clear.html")

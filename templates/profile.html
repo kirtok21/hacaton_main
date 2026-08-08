@@ -69,20 +69,20 @@
 
     .register-btn {
       display: inline-block;
-      background-color: var(--red);       /* Красный фон */
-      color: var(--white) !important;      /* Белый текст */
-      text-decoration: none;               /* Убираем подчеркивание */
-      padding: 14px 32px;                  /* Внутренние отступы */
-      border-radius: 50px;                 /* Овальная форма (большое скругление) */
-      font-weight: 600;                    /* Жирный шрифт */
+      background-color: var(--red);
+      color: var(--white) !important;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 600;
       font-size: 16px;
-      transition: all 0.3s ease;           /* Плавная анимация */
-      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3); /* Легкая тень */
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
     }
 
     .register-btn:hover {
-      background-color: #b71c1c;           /* Темнее при наведении */
-      transform: translateY(-2px);         /* Чуть приподнимается */
+      background-color: #b71c1c;
+      transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(211, 47, 47, 0.4);
     }
 
@@ -103,19 +103,19 @@
     <div class="profile-content">
       <div class="info-row">
         <span class="info-label">Имя:</span>
-        <span class="info-value">Иван</span>
+        <span class="info-value">{{name}}</span>
       </div>
       <div class="info-row">
         <span class="info-label">Фамилия:</span>
-        <span class="info-value">Петров</span>
+        <span class="info-value">{{surname}}</span>
       </div>
       <div class="info-row">
         <span class="info-label">Логин:</span>
-        <span class="info-value">ivan_petrov</span>
+        <span class="info-value">{{login}}</span>
       </div>
       <div class="info-row">
         <span class="info-label">Почта:</span>
-        <span class="info-value">ivan.petrov@example.com</span>
+        <span class="info-value">{{email}}</span>
       </div>
     </div>
     </div>
