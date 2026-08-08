@@ -1,6 +1,4 @@
-1 medium_room_1 15
-2 medium_room_2 15
-3 big_room_1 30
-4 big_room_2 30
-5 small_room_1 5
-6 small_room_2 5
+1 small_room_1 5
+2 medium_room_1 15
+3 medium_room_2 15
+4 big_room_1 30

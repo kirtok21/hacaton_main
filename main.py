@@ -5,9 +5,17 @@ import json
 import datetime
 import random
 
+admin_pass="admin"
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 user=[""]*5
+room_list=list()
+with open("rooms.txt",'r') as f:
+    splt=f.read().split('\n')
+    for i in splt:
+        room_list.append(i.split()[1])
+
+week_days=["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 @app.get("/", response_class=HTMLResponse)
 async def main(request: Request):
     return templates.TemplateResponse(request, "main.html")
@@ -106,7 +114,21 @@ async def profile(request: Request):
         "login": user[0],
     }
     return templates.TemplateResponse(request, "profile.html",values)
+@app.get("/clear_bookings", response_class=HTMLResponse):
+async def clear_bookings(request: Request,
+                         pasw: str=Form(...)):
+    global admin_pass
+    global room_list
+    global
+    if admin_pass==pasw:
+        room_list = list()
+        with open("rooms.txt", 'r') as f:
+            splt = f.read().split('\n')
+            for i in splt:
+                room_list.append(i.split()[1])
+        print(room_list)
+        for i in room_list:
+            for j in
 
 @app.get("/all_bookings", response_class=HTMLResponse)
 async def all_bookings(request: Request):
-
