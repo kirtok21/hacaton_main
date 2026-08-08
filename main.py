@@ -37,10 +37,15 @@ async def reg1(request: Request,
         a=login+" "+password+" "+email+" "+name+" "+surname
         f.write(login+" "+password+" "+email+" "+name+" "+surname+" "+'\n')
         f.close()
-        return templates.TemplateResponse(request, "hub.html")
+        values = {
+            "reply": None,
+            "result": "hub"
+        }
+        return templates.TemplateResponse(request, "hub.html",values)
     else:
         values={
-            "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию"
+            "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию",
+            "result": "reg"
         }
         return templates.TemplateResponse(request, "auth.html",values)
 
@@ -101,4 +106,7 @@ async def profile(request: Request):
         "login": user[0],
     }
     return templates.TemplateResponse(request, "profile.html",values)
+
+@app.get("/all_bookings", response_class=HTMLResponse)
+async def all_bookings(request: Request):
 
