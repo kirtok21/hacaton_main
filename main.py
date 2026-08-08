@@ -4,7 +4,7 @@ from starlette.templating import Jinja2Templates
 import json
 import datetime
 import random
-
+#8 9 10 11 12 13 14 15 16 17 18 19 20
 admin_pass="admin"
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -114,12 +114,18 @@ async def profile(request: Request):
         "login": user[0],
     }
     return templates.TemplateResponse(request, "profile.html",values)
-@app.get("/clear_bookings", response_class=HTMLResponse):
-async def clear_bookings(request: Request,
+
+@app.get("/clear_bookings", response_class=HTMLResponse)
+async def clear_bookings(request: Request):
+    return templates.TemplateResponse(request, "clear.html")
+
+
+@app.post("/clear_bookings", response_class=HTMLResponse)
+async def clear_bookings1(request: Request,
                          pasw: str=Form(...)):
     global admin_pass
     global room_list
-    global
+    global week_days
     if admin_pass==pasw:
         room_list = list()
         with open("rooms.txt", 'r') as f:
@@ -128,7 +134,21 @@ async def clear_bookings(request: Request,
                 room_list.append(i.split()[1])
         print(room_list)
         for i in room_list:
-            for j in
+            for j in week_days:
+                with open(f"bookings\\{j}\\{i}.txt",'w+') as f:
+                    print("empty empty empty empty empty empty empty empty empty empty empty empty empty",end='',file=f)
 
 @app.get("/all_bookings", response_class=HTMLResponse)
 async def all_bookings(request: Request):
+    global room_list
+    global week_days
+    values={}
+    for i in week_days:
+        for j in room_list:
+            for time in range(8,21):
+                with open(f"bookings\\{i}\\{j}.txt",'r') as f:
+                    values[f"{i}_{j}_{time}"]=f.read().strip().split()[time-8]
+    a=""
+    for i in values.items():
+        a=a+str(i)+'\n'
+    return a
