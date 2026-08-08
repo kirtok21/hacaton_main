@@ -19,6 +19,25 @@
             background-repeat: no-repeat;    
         }
 
+        .btn-oval {
+            display: inline-block;
+            background-color: #d32f2f; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            text-decoration: none;
+            font-size: 14px; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-oval:hover {
+            background-color: #9a0007; 
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
         .register-btn {
             background-color: #ff3838; 
             color: white; 
@@ -43,16 +62,14 @@
         .register-btn:active {
             transform: translateY(1px);
         }
-
-        /* Затемнение фона (чтобы текст читался) */
         .background-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Черный цвет с прозрачностью 50% */
-            z-index: -1; /* Уходит под контент */
+            background-color: rgba(0, 0, 0, 0.5); 
+            z-index: -1; 
         }
 
         h1 {
@@ -64,7 +81,6 @@
             letter-spacing: 1px;
         }
 
-        /* Контейнер для размещения таблиц в ряд */
         .tables-container {
             display: flex;
             flex-wrap: wrap;
@@ -77,7 +93,6 @@
 
         table {
             border-collapse: collapse;
-            /* Уменьшенная ширина таблицы */
             width: 400px; 
             background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -92,7 +107,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Заголовок столбцов (комнаты) */
         th {
             background-color: #e6634b;
             color: #fff;
@@ -101,13 +115,12 @@
             font-size: 0.8rem;
         }
 
-        /* Заголовок строк (время) */
         td:first-child {
             background-color:  #e13618;
             color: #f9fafc;
             font-weight: bold;
             white-space: nowrap;
-            width: 80px; /* Уменьшенная ширина колонки времени */
+            width: 80px;
         }
 
         .bronya-cell {
@@ -133,7 +146,6 @@
     <h1>Таблица бронирования по дням</h1>
 
     <div class="tables-container">
-        <!-- Понедельник -->
         <div>
             <div class="day-label">Понедельник</div>
             <table>
@@ -228,7 +240,6 @@
             </table>
         </div>
 
-        <!-- Вторник -->
         <div>
             <div class="day-label">Вторник</div>
             <table>
@@ -323,7 +334,6 @@
             </table>
         </div>
 
-        <!-- Среда -->
         <div>
             <div class="day-label">Среда</div>
             <table>
@@ -418,7 +428,6 @@
             </table>
         </div>
 
-        <!-- Четверг -->
         <div>
             <div class="day-label">Четверг</div>
             <table>
@@ -513,7 +522,6 @@
             </table>
         </div>
 
-        <!-- Пятница -->
         <div>
             <div class="day-label">Пятница</div>
             <table>
@@ -609,7 +617,7 @@
         </div>
     </div>
 
-    <button type="submit" class="register-btn">Записаться</button><br>
+    <lu><a href="create_booking.html" class="btn-oval">Записаться</a></lu><br>
 
 </body>
 </html>

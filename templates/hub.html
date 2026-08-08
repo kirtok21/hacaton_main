@@ -101,6 +101,24 @@
         .register-btn:active {
             transform: translateY(1px);
         }
+        .btn-oval {
+            display: inline-block;
+            background-color: #d32f2f; 
+            color: white; 
+            padding: 8px 16px; 
+            border-radius: 50px; 
+            text-decoration: none;
+            font-size: 14px; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-oval:hover {
+            background-color: #9a0007; 
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -119,11 +137,9 @@
         </ul>
 
         <div class="btn-wrapper">
-            <a href="profile.html" class="register-btn">Профиль</a>
-            <a href="all_bookings.html" class="register-btn">Все записи</a>
+            <lu><a href="reg.html" class="btn-oval">Профиль</a></lu>
+            <lu><a href="reg.html" class="btn-oval">Все записи</a></lu>
         </div>
     </div>
 </body>
 </html>
-
-
