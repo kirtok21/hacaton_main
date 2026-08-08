@@ -1,10 +1,9 @@
 from fastapi import FastAPI ,Request ,Form
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
-from selenium import webdriver
 import json
 import datetime
-import randint
+import random
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -18,16 +17,22 @@ async def reg(request: Request):
     return templates.TemplateResponse(request, "reg.html")
 
 @app.post("/reg", response_class=HTMLResponse)
-async def reg1(request: Request):
+async def reg1(request: Request,
+               login: str=Form(...),
+               password: str=Form(...),
+               email: str=Form(...),
+               name: str=Form(...),
+               surname: str=Form(...)):
     global user
     data = await request.form()
-    login = data['login']
-    password = data['password']
-    email = data['email']
-    name = data['name']
-    surname = data['surname']
-    f=open("profiles.txt",'a')
-    if login not in f.read():
+    # login = data['login']
+    # password = data['password']
+    # email = data['email']
+    # name = data['name']
+    # surname = data['surname']
+    f=open("profiles.txt",'a+')
+    a=f.read()
+    if login not in a:
         user=[login,password,email,name,surname]
         a=login+" "+password+" "+email+" "+name+" "+surname
         f.write(login+" "+password+" "+email+" "+name+" "+surname+" "+'\n')
@@ -37,19 +42,21 @@ async def reg1(request: Request):
         values={
             "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию"
         }
-        return templates.TemplateResponse(request, "hub.html",values)
+        return templates.TemplateResponse(request, "auth.html",values)
 
 @app.get("/auth", response_class=HTMLResponse)
-async def handle_log(request: Request):
+async def auth(request: Request):
     return templates.TemplateResponse(request, "auth.html")
 
 @app.post("/auth", response_class=HTMLResponse)
-async def handle_login(request: Request):
+async def auth1(request: Request,
+                username: str=Form(...),
+                password: str=Form(...)):
     global user
     authorisation = False
     data = await request.form()
-    username=data['name']
-    password=data['password']
+    # username=data['name']
+    # password=data['password']
     with open("profiles.txt", "r", encoding="utf-8") as file:
         for line in file:
             cleaned_line = line.strip()
@@ -81,17 +88,17 @@ async def handle_login(request: Request):
         return templates.TemplateResponse(request, "hub.html", values)
 
 @app.get("/hub", response_class=HTMLResponse)
-async def handle_log(request: Request):
+async def hub(request: Request):
     return templates.TemplateResponse(request, "hub.html")
 
 @app.get("/profile", response_class=HTMLResponse)
-async def handle_log(request: Request):
-    return templates.TemplateResponse(request, "profile.html")
-
-@app.post("/profile", response_class=HTMLResponse)
-async def handle_log(request: Request):
+async def profile(request: Request):
     global user
-    values={
-
+    values = {
+        "name":user[3],
+        "surname": user[4],
+        "email": user[2],
+        "login": user[0],
     }
-    return templates.TemplateResponse(request, "profile.html")
+    return templates.TemplateResponse(request, "profile.html",values)
+
