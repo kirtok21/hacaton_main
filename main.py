@@ -4,10 +4,18 @@ from starlette.templating import Jinja2Templates
 import json
 import datetime
 import random
-
+#8 9 10 11 12 13 14 15 16 17 18 19 20
+admin_pass="admin"
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 user=[""]*5
+room_list=list()
+with open("rooms.txt",'r') as f:
+    splt=f.read().split('\n')
+    for i in splt:
+        room_list.append(i.split()[1])
+
+week_days=["monday","tuesday","wednesday","thursday","friday","saturday","sunday"]
 @app.get("/", response_class=HTMLResponse)
 async def main(request: Request):
     return templates.TemplateResponse(request, "main.html")
@@ -37,10 +45,15 @@ async def reg1(request: Request,
         a=login+" "+password+" "+email+" "+name+" "+surname
         f.write(login+" "+password+" "+email+" "+name+" "+surname+" "+'\n')
         f.close()
-        return templates.TemplateResponse(request, "hub.html")
+        values = {
+            "reply": None,
+            "result": "hub"
+        }
+        return templates.TemplateResponse(request, "hub.html",values)
     else:
         values={
-            "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию"
+            "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию",
+            "result": "reg"
         }
         return templates.TemplateResponse(request, "auth.html",values)
 
@@ -102,3 +115,80 @@ async def profile(request: Request):
     }
     return templates.TemplateResponse(request, "profile.html",values)
 
+@app.get("/clear_bookings", response_class=HTMLResponse)
+async def clear_bookings(request: Request):
+    return templates.TemplateResponse(request, "clear.html")
+
+
+@app.post("/clear_bookings", response_class=HTMLResponse)
+async def clear_bookings1(request: Request,
+                         pasw: str=Form(...)):
+    global admin_pass
+    global room_list
+    global week_days
+    if admin_pass==pasw:
+        room_list = list()
+        with open("rooms.txt", 'r') as f:
+            splt = f.read().split('\n')
+            for i in splt:
+                room_list.append(i.split()[1])
+        print(room_list)
+        for i in room_list:
+            for j in week_days:
+                with open(f"bookings\\{j}\\{i}.txt",'w+') as f:
+                    print("empty empty empty empty empty empty empty empty empty empty empty empty empty",end='',file=f)
+
+@app.get("/all_bookings", response_class=HTMLResponse)
+async def all_bookings(request: Request):
+    global room_list
+    global week_days
+    values={}
+    for i in week_days:
+        for j in room_list:
+            for time in range(8,21):
+                with open(f"bookings\\{i}\\{j}.txt",'r') as f:
+                    values[f"{i}_{j}_{time}"]=f.read().strip().split()[time-8]
+    a=""
+    for i in values.items():
+        a=a+str(i)+'\n'
+    return a
+
+@app.get("/booking", response_class=HTMLResponse)
+async def booking(request: Request):
+    return templates.TemplateResponse(request, "create_booking.html")
+
+@app.post("/booking", response_class=HTMLResponse)
+async def booking1(request: Request,
+        time_start: int = Form(...),
+        time_end: int = Form(...),
+        number: int = Form(...),
+        week_day: str = Form(...)):
+    if time_start > time_end :
+        values={
+            "response":"Err_Time"
+        }
+        return templates.TemplateResponse(request, "hub.html",values)
+    global room_list
+    global week_days
+    global user
+    free=True
+    room_id=room_list[number-1]
+    with open(f"bookings\\{week_day}\\{room_id}.txt",'r') as f:
+        books=f.read().strip().split()
+        for i in range(time_start-8,time_end-7):
+            if books[i]!="empty":
+                free=False
+            else:
+                books[i]=user[3]+"_"+user[4]
+    with open(f"bookings\\{week_day}\\{room_id}.txt", 'w') as f:
+        print(*books,file=f,end='')
+        if free:
+            values={
+                "response":"OK"
+            }
+            return templates.TemplateResponse(request, "hub.html",values)
+        else:
+            values = {
+                "response": "Err_Not_Free"
+            }
+            return templates.TemplateResponse(request, "hub.html",values)
