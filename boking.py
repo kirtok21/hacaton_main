@@ -25,7 +25,7 @@ async def handle_time(
     if time_start > time_end or time_start == time_end:
         return "время начала не может быть больше или быть равным времени конца"
     time_list = []
-    file_path = "booking/"+week_day+"/"+size
+    file_path = "booking/"+week_day+"/"+size+".txt"
 
     if os.path.exists(file_path):
         with open(file_path, "r", encoding='utf-8') as f:
