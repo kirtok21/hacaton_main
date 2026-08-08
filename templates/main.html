@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Авторизация на сайт</title>
+    <style>
+        body {
+            background-color: #fff; /* Белый фон страницы */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(211, 47, 46, 0.15); /* Тень с красным подтоном */
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+            border: 1px solid #d32f2f; /* Тонкая красная рамка */
+        }
+
+        h2 {
+            color: #d32f2f; /* Красный заголовок */
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #d32f2f;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #9a0007; /* Тёмно‑красный при наведении */
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-
+    <div class="container">
+        <h2>Вход</h2>
+        <ul>
+            <li><a href="reg.html">Регистрация</a></li>
+            <li><a href="auth.html">Авторизация</a></li>
+        </ul>
+    </div>
 </body>
 </html>
