@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .registration-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(246, 4, 4);
+            width: 320px;
+        }
+
+        .registration-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #c91414;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #230b0b;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; 
+        }
+
+        button.register-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff3838; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button.register-btn:hover {
+            background-color: #e02a2a; 
+        }
+    </style>
 </head>
 <body>
+
+<div class="registration-form">
+    <h2>Авторизация</h2>
+    <form action="#" method="POST">
+
+        <div class="form-group">
+            <label for="login">Логин/почта/телефон</label>
+            <input type="text" id="login" name="login" required placeholder="Введите свой логин/почту/телефон">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required placeholder="Введите ваш пароль">
+        </div>
+
+        <button type="submit" class="register-btn">Авторизоваться</button>
+    </form>
+</div>
 
 </body>
 </html>
