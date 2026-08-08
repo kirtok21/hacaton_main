@@ -1,10 +1,580 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Таблицы бронирований</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(135deg, #e3b6b6 0%, #fff6f6 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Контейнер для размещения таблиц в ряд */
+        .tables-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1400px;
+            margin-bottom: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            /* Уменьшенная ширина таблицы */
+            width: 400px; 
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid rgba(200, 200, 200, 0.5);
+            text-align: center;
+            /* Уменьшенные отступы */
+            padding: 8px; 
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Заголовок столбцов (комнаты) */
+        th {
+            background-color: #e6634b;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        /* Заголовок строк (время) */
+        td:first-child {
+            background-color:  #e6634b;
+            color: #f9fafc;
+            font-weight: bold;
+            white-space: nowrap;
+            width: 80px; /* Уменьшенная ширина колонки времени */
+        }
+
+        /* Ячейки с бронью */
+        .bronya-cell {
+            background-color: white;
+            color: #d63333;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 2px solid rgb(110, 105, 105);
+            cursor: default;
+        }
+        
+        .day-label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #f8f5f5;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
+    <h1>Таблица бронирования по дням</h1>
+
+    <div class="tables-container">
+        <!-- Понедельник -->
+        <div>
+            <div class="day-label">Понедельник</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th>1 комната</th>
+                        <th>2 комната</th>
+                        <th>3 комната</th>
+                        <th>4 комната</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>11:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>13:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>15:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>16:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>17:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>18:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>19:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>20:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Вторник -->
+        <div>
+            <div class="day-label">Вторник</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th>1 комната</th>
+                        <th>2 комната</th>
+                        <th>3 комната</th>
+                        <th>4 комната</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                        <td>10:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>11:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>13:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>15:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>16:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>17:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>18:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>19:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>20:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Среда -->
+        <div>
+            <div class="day-label">Среда</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th>1 комната</th>
+                        <th>2 комната</th>
+                        <th>3 комната</th>
+                        <th>4 комната</th>
+                    </tr>
+                </thead>
+                <tbody>
+                      <tr>
+                        <td>10:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>11:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>13:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>15:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>16:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>17:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>18:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>19:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>20:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Четверг -->
+        <div>
+            <div class="day-label">Четверг</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th>1 комната</th>
+                        <th>2 комната</th>
+                        <th>3 комната</th>
+                        <th>4 комната</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>11:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>13:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>15:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>16:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>17:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>18:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>19:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>20:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Пятница -->
+        <div>
+            <div class="day-label">Пятница</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th>1 комната</th>
+                        <th>2 комната</th>
+                        <th>3 комната</th>
+                        <th>4 комната</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>11:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>13:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>15:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>16:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>17:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>18:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>19:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                      <tr>
+                        <td>20:00</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                        <td class="bronya-cell">l</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
 </html>
+
