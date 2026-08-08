@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Smart Booking — Основная страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .main-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(246, 4, 4, 0.3);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff3838; 
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        p.description {
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            color: #444;
+        }
+
+        ul.features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.features-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #230b0b;
+        }
+
+        ul.features-list li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
+    <div class="main-container">
+        <h1>Основная страница</h1>
+        
+        <p class="description">
+            Smart Booking — это единое цифровое окно для легкого управления всеми переговорными комнатами вашего бизнес-центра.
+        </p>
 
+        <ul class="features-list">
+            <li>Возможность посмотреть все записи на неделю. Наглядно видите, какие комнаты свободны и их вместимость.</li>
+            <li>Бронирование. Смотрите, какие окна свободны, и выбираете время, слот, комнату — и система мгновенно резервирует её за вами.</li>
+            <li>Защита от двойных броней. Система сама блокирует занятые слоты — пересечения невозможны.</li>
+            <li>Отмена и перенос. Одним движением освобождаете комнату, если встреча отменилась.</li>
+        </ul>
+    </div>
 </body>
 </html>
