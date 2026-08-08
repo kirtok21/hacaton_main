@@ -16,7 +16,7 @@ async def show_time_form(request: Request):
 
 @app.post("/booking")
 async def handle_time(
-        room: str =     Form(...),
+        room: str = Form(...),
         time_start: int = Form(...),
         time_end: int = Form(...),
         size: str = Form(...),
