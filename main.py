@@ -8,9 +8,9 @@ import randint
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-
+user=[""]*5
 @app.get("/", response_class=HTMLResponse)
-async def show_root(request: Request):
+async def main(request: Request):
     return templates.TemplateResponse(request, "main.html")
 
 @app.get("/reg", response_class=HTMLResponse)
@@ -19,6 +19,7 @@ async def reg(request: Request):
 
 @app.post("/reg", response_class=HTMLResponse)
 async def reg1(request: Request):
+    global user
     data = await request.form()
     login = data['login']
     password = data['password']
@@ -27,12 +28,16 @@ async def reg1(request: Request):
     surname = data['surname']
     f=open("profiles.txt",'a')
     if login not in f.read():
+        user=[login,password,email,name,surname]
         a=login+" "+password+" "+email+" "+name+" "+surname
         f.write(login+" "+password+" "+email+" "+name+" "+surname+" "+'\n')
         f.close()
         return templates.TemplateResponse(request, "hub.html")
     else:
-        return "User already exists"
+        values={
+            "reply" : "Пользователь с таким логином уже есть, попробуйте авторизацию"
+        }
+        return templates.TemplateResponse(request, "hub.html",values)
 
 @app.get("/auth", response_class=HTMLResponse)
 async def handle_log(request: Request):
@@ -40,6 +45,7 @@ async def handle_log(request: Request):
 
 @app.post("/auth", response_class=HTMLResponse)
 async def handle_login(request: Request):
+    global user
     authorisation = False
     data = await request.form()
     username=data['name']
@@ -55,18 +61,22 @@ async def handle_login(request: Request):
             print(file_login == username)
             print(file_password == password)
             if file_login == username and file_password == password:
-                current_login=parts
+                user = list(parts)
                 print(parts)
                 authorisation = True
+                values = {
+                    "name": user[3],
+                    "surname": user[4],
+                    "email": user[2],
+                    "login": user[0]
+                }
                 break
-    values = {
-        "name": current_login[3],
-        "surname": current_login[4],
-        "email": current_login[2],
-        "login": current_login[0]
-    }
+
     if not(authorisation):
-        return templates.TemplateResponse(request, "main.html")
+        values = {
+            "reply": "Неправильный пароль / Пользователя с таким логином не сущевствует"
+        }
+        return templates.TemplateResponse(request, "main.html",values)
     else:
         return templates.TemplateResponse(request, "hub.html", values)
 
@@ -74,3 +84,14 @@ async def handle_login(request: Request):
 async def handle_log(request: Request):
     return templates.TemplateResponse(request, "hub.html")
 
+@app.get("/profile", response_class=HTMLResponse)
+async def handle_log(request: Request):
+    return templates.TemplateResponse(request, "profile.html")
+
+@app.post("/profile", response_class=HTMLResponse)
+async def handle_log(request: Request):
+    global user
+    values={
+
+    }
+    return templates.TemplateResponse(request, "profile.html")
