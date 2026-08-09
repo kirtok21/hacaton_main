@@ -108,7 +108,7 @@ async def auth1(request: Request,
 async def auth(request: Request):
     return templates.TemplateResponse(request, "auth.html",values)
 
-@app.post("/hub", response_class=HTMLResponse)
+@app.get("/hub", response_class=HTMLResponse)
 async def hub(request: Request):
     return templates.TemplateResponse(request, "hub.html")
 
@@ -157,7 +157,8 @@ async def clear_bookings1(request: Request,
         for i in room_list:
             for j in week_days:
                 with open(f"bookings\\{j}\\{i}.txt",'w+') as f:
-                    print("empty empty empty empty empty empty empty empty empty empty empty empty empty",end='',file=f)
+                    print("- "*13,end='',file=f)
+    return templates.TemplateResponse(request, "main.html")
 
 @app.get("/all_bookings", response_class=HTMLResponse)
 async def all_bookings(request: Request):
@@ -172,7 +173,7 @@ async def all_bookings(request: Request):
     a=""
     for i in values.items():
         a=a+str(i)+'\n'
-    return a
+    return templates.TemplateResponse(request, "all_bookings.html", values)
 
 @app.get("/booking", response_class=HTMLResponse)
 async def booking(request: Request):
@@ -193,11 +194,14 @@ async def booking1(request: Request,
     global week_days
     global user
     free=True
+    time_end=int(time_end)
+    time_start=int(time_start)
+    week_day=week_days[int(week_day)-1]
     room_id=room_list[number-1]
     with open(f"bookings\\{week_day}\\{room_id}.txt",'r') as f:
         books=f.read().strip().split()
         for i in range(time_start-8,time_end-7):
-            if books[i]!="empty":
+            if books[i]!="-":
                 free=False
             else:
                 books[i]=user[3]+"_"+user[4]
