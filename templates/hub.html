@@ -6,21 +6,32 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0; 
             color: #333;
             display: flex;
-            justify-content:center; 
-            background-image:url('mts.jpg');
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('mts.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        .main-container {
+
+        .content-wrapper {
             width: 100%;
-            max-width: 800px; 
-            padding: 20px; 
+            max-width: 800px;
+            padding: 40px;
             box-sizing: border-box;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 60px;
+
+            /* Декоративные эффекты */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         h1 {
@@ -58,7 +69,6 @@
             top: 0;
             font-size: 18px;
         }
-
        
         .btn-wrapper {
             margin-top: 40px;
@@ -74,8 +84,6 @@
             padding: 18px 35px;
             font-size: 18px; 
             font-weight: bold;
-            
-         
             border-radius: 50px; 
             box-shadow: 0 4px 15px rgba(255, 56, 56, 0.4); 
             cursor: pointer; 
@@ -90,13 +98,32 @@
             box-shadow: 0 6px 20px rgba(255, 56, 56, 0.6);
         }
 
+
         .register-btn:active {
             transform: translateY(1px);
+        }
+        .btn-oval {
+            display: inline-block;
+            background-color: #d32f2f;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-oval:hover {
+            background-color: #9a0007;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
+    <div class="content-wrapper">
         <h1>Smart Booking</h1>
         
         <p class="description">
@@ -113,6 +140,8 @@
             <a href="profile" class="register-btn">Профиль</a>
             <a href="all_bookings" class="register-btn">Все записи</a>
             <a href="create_booking" class="register-btn">Профиль</a>
+            <lu><a href="reg.html" class="btn-oval">Профиль</a></lu>
+            <lu><a href="reg.html" class="btn-oval">Все записи</a></lu>
         </div>
     </div>
 </body>
